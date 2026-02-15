@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    void sort012(vector<int>& arr) {
+        // code here
+        vector<int> arr1;
+        int zero = 0, one = 0, two = 0;
+        for(int i=0; i< arr.size(); i++){
+            if(arr[i] == 0)
+            zero++;
+            else if(arr[i] == 1)
+            one++;
+            else
+            two++;
+        }
+        arr1.insert(arr1.end(), zero, 0);
+        arr1.insert(arr1.end(), one, 1);
+        arr1.insert(arr1.end(), two, 2);
+        arr=arr1;
+    }
+};
