@@ -1,0 +1,67 @@
+class Solution {
+  public:
+    int inversionCount(vector<int> &arr) {
+        // Code Here
+        return mergeSort(arr, 0, arr.size()-1);
+    }
+    public:
+      int mergeSort(vector<int> &arr, int left, int right){
+          
+          int count=0;
+          if(left>=right)
+          return count;
+          
+          int mid = left +(right-left)/2;
+          
+         count += mergeSort(arr, left, mid);
+          count+= mergeSort(arr,mid+1, right);
+          count = count+ merge(arr,left,mid,right);
+          return count;
+      }
+    public:
+      int merge(vector<int> &arr, int left, int mid, int right){
+          
+          int n1 = mid-left+1;
+          int n2= right - mid;
+          int count = 0;
+          int i, j, k;
+          
+          vector<int> arr1(n1), arr2(n2);
+          
+          for(i=0; i<n1; i++){
+              arr1[i] = arr[left+i];
+          }
+          for(j=0; j<n2; j++){
+              arr2[j] = arr[mid+1+j];
+          }
+          
+          i=0,j=0,k=left;
+          while(i<n1 && j<n2){
+              if(arr1[i]<=arr2[j]){
+                  arr[k]= arr1[i];
+                 
+                  i++;
+                  k++;
+              }
+              else{
+                 arr[k]= arr2[j] ;
+                  count= count + (n1-i);
+              j++;
+              k++;
+              }
+              
+             
+          }
+           while(i<n1){
+                  arr[k]= arr1[i];
+                  k++;
+                  i++;
+              }
+              while(j<n2){
+                  arr[k]= arr2[j];
+                  k++;
+                  j++;
+              }
+          return count;
+      }
+};
