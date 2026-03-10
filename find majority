@@ -1,0 +1,31 @@
+class Solution {
+  public:
+    int majorityElement(vector<int>& arr) {
+        // code here
+        //basically we are using the Boyer-Moore majority vote algorithm to find the majority element in the array. We are maintaining a count of the current candidate for majority element and its count. We are iterating through the array and updating the candidate and its count accordingly. Finally we are checking if the candidate is actually the majority element by counting its occurrences in the array. Time complexity is O(n) and space complexity is O(1).
+        int num, count = 0, res =0;
+        
+        for(int i = 0; i<arr.size(); i++){
+            
+            if(count == 0){
+                num = arr[i];
+                count = 1;
+            }
+            else if(num == arr[i])
+            count++;
+            else if(num!= arr[i])
+            count--;
+            
+        }
+         if(count == 0)
+         return -1;
+        
+        for(int j = 0; j<arr.size(); j++){
+            if(num == arr[j])
+            res++;
+        }
+        if(res <= arr.size()/2)
+        return -1;
+        return num;
+    }
+};
