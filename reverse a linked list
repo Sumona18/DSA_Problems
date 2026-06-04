@@ -1,0 +1,31 @@
+/*
+class Node {
+ public:
+    int data ;
+    Node *next ;
+
+    Node(int x) {
+        data = x ;
+        next = nullptr ;
+    }
+};
+*/
+//basically we are using three pointers to reverse the linked list. We are iterating through the linked list and for each node, we are storing the next node in a temporary variable, then we are changing the next pointer of the current node to point to the previous node, then we are moving the previous pointer to the current node and the current pointer to the next node. Finally, we are returning the previous pointer which will be the new head of the reversed linked list. Time complexity is O(n) and space complexity is O(1).
+
+class Solution {
+  public:
+    Node* reverseList(Node* head) {
+        // code here
+        Node* current = head;
+        Node* prev = nullptr;
+        Node* next = nullptr;
+        while(current!= nullptr){
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+            
+        }
+        return prev;
+    }
+};
