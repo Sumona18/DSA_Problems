@@ -1,0 +1,32 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+//basically we are using recursion to merge the two sorted linked lists. We are comparing the current nodes of both lists and attaching the smaller node to the merged list. Then we are recursively calling the function for the next node of the attached node and the other list. Finally, we are returning the head of the merged list. Time complexity is O(n+m) where n and m are the lengths of the two linked lists, and space complexity is O(n+m) due to recursive stack space in worst case when all nodes of one list are smaller than the other list.
+//is it the best approach? It is a clean and elegant approach, but it may not be the most efficient in terms of space complexity due to the recursive stack space. The iterative approach using a dummy node has O(1) space complexity, while the recursive approach has O(n+m) space complexity in worst case. However, the recursive approach may be easier to understand and implement for some people.
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        if(list1 == nullptr)
+        return list2;
+
+        if(list2 == nullptr)
+        return list1;
+
+        if(list1->val < list2->val){
+        list1->next = mergeTwoLists(list1->next, list2);
+        return list1;
+        }
+        else{
+            list2->next = mergeTwoLists(list1, list2->next);
+            return list2;
+        }
+
+    }
+};
