@@ -1,0 +1,26 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+//basically we are using two nested loops to find the intersection node of the two linked lists. We are iterating through the first linked list and for each node, we are iterating through the second linked list to check if there is a node which is the same as the current node of the first linked list. If we find such a node, we are returning it as the intersection node. If we iterate through both linked lists and do not find any intersection node, we are returning null. Time complexity is O(n*m) where n and m are the lengths of the two linked lists, and space complexity is O(1) since we are not using any extra space for finding the intersection.
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* currA = headA;
+        ListNode* currB = headB;
+        while(currA !=nullptr){
+            while(currB != nullptr){
+                if(currA == currB)
+                return currA;
+                currB = currB->next;
+            }
+            currA = currA->next;
+            currB = headB;
+        }
+        return 0;
+    }
+};
