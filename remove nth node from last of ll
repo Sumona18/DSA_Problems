@@ -1,0 +1,40 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+//basically we are first finding the size of the linked list and then we are calculating the position of the node to be removed from the start of the linked list. If the position is 0, we are removing the head node and returning the next node as the new head. Otherwise, we are iterating through the linked list until we reach the node just before the node to be removed and then we are changing its next pointer to skip the node to be removed. Finally, we are returning the head of the modified linked list. Time complexity is O(n) and space complexity is O(1).
+//why space in o1, even we are using a dummy node? The dummy node is a local variable and it is not dynamically allocated, so it does not contribute to the space complexity. We are only using a constant amount of extra space for the dummy node and the current pointer, so the overall space complexity is O(1).s
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+       ListNode dummy(0);
+        ListNode* current = head;
+        int size = 0;
+        while(current != nullptr){
+            current= current->next;
+            size++;
+        }
+        current = &dummy;
+        int m = size-n;
+        if(m==0){
+            current = head->next;
+            return current;
+        }
+        current->next = head;
+        while(m--){
+            current=current->next;
+        }
+        if(current->next == nullptr)
+        current = nullptr;
+        else
+        current->next = current->next->next;
+
+        return dummy.next;
+    }
+};
