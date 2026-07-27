@@ -1,0 +1,17 @@
+class Solution {
+  public:
+    bool isMaxHeap(vector<int> &arr) {
+        // code here
+        //basically we are checking if the given array satisfies the max heap property. We are iterating through the array and for each element, we are checking if it is greater than or equal to its left and right children. If it is not, we are returning false. If we iterate through the entire array and all elements satisfy the max heap property, we are returning true. Time complexity is O(n) and space complexity is O(1).
+        //the left child is at index 2*i+1 and the right child is at index 2*i+2. We are only checking up to the last parent node which is at index (n-2)/2 where n is the size of the array.
+        int i;
+        int n = arr.size();
+        for(i=0;i<=(n-2)/2;i++){
+            if(arr[i]<arr[(2*i+1)] )
+                return false;
+            if(2*i+2<arr.size() && arr[i]<arr[(2*i+2)])
+            return false;
+            }
+        return true;
+    }
+};
